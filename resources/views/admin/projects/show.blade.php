@@ -11,6 +11,16 @@
 
         {{-- tipologia, operatore ternario per il caso in cui il valore type sia nullo(visto che è stata impostata la possibilità che sia nullo) --}}
         <span>Tipologia: {{$project->type ? $project->type->name : 'nessuna'}}</span>
+        
+        {{-- TECNOLOGIE --}}
+        <div class="d-flex py-3">
+
+            @foreach ($project->technologies as $technology)
+
+            <span class="badge rounded-pill mx-1" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+            @endforeach
+        </div>
+        
         <hr>
 
         <h2>{{$project->title}}</h2>

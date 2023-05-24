@@ -16,10 +16,13 @@
             Slug
         </th>
         <th>
-            Type
+            Tipologie
         </th>
         <th>
-            Comandi
+            Tecnologie
+        </th>
+        <th>
+            {{-- comandi --}}
         </th>
     </thead>
     
@@ -34,6 +37,27 @@
             <td>{{$project->slug}}</td>
             {{-- aggiungo il punto di domanda per includere la possibilitò che la tipologia sia nulla --}}
             <td>{{$project->type?->name}}</td>
+            {{-- tecnologie --}}
+            <td>
+                {{-- primo metodo --}}
+                {{-- ciclo all'interno delle tecnologie del progetto --}}
+                {{-- @foreach ($project->technologies as $technology)
+                <span class="badge rounded-pill mx-1" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+                @endforeach --}}
+
+                {{-- secondo metodo --}}
+                @php
+                    // mi creo un array vuoto
+                    $technologyNames = [];
+                    // ciclo per riempire l'array con i nomi dei progetti
+                    foreach ($project->technologies as $technology) {    
+                        $technologyNames[] = $technology->name;
+                    }
+                    // stampo a schermo gli elementi dell'array separati da una virgola con lo spazio
+                    echo implode(', ', $technologyNames);
+                @endphp
+
+            </td>
             <td>
                 <a href="{{route('admin.projects.show', $project->slug)}}">
                     <i class="fa-solid fa-magnifying-glass"></i>

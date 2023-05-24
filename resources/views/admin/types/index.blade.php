@@ -28,6 +28,12 @@
         </tbody>
     </table>
 
+    <div class="d-flex justify-content-around mb-5">
+        <a href="{{route('admin.types.create')}}" class="btn btn-primary">
+            Aggiungi una tipologia
+        </a>
+    </div>
+
 </div>
     
 @endsection

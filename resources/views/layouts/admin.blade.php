@@ -149,10 +149,10 @@ function routeNameContains($string) {
 
                 <div class="list-group list-group-flush">
                     <a href="{{route('admin.technologies.index')}}" class="list-group-item list-group-item-action {{routeNameContains('technologies.index') ? 'active' : ''}}">Tutte le tecnologie</a>
-                    {{-- <a href="{{route('admin.technologies.create')}}" class="list-group-item list-group-item-action {{routeNameContains('technologies.create') ? 'active' : ''}}">Aggiungi una tecnologia</a> --}}
+                    <a href="{{route('admin.technologies.create')}}" class="list-group-item list-group-item-action {{routeNameContains('technologies.create') ? 'active' : ''}}">Aggiungi una tecnologia</a>
 
                     {{-- <a href="" class="list-group-item list-group-item-action {{routeNameContains('technologies.index') ? 'active' : ''}}">Tutte le tecnologie</a> --}}
-                    <a href="" class="list-group-item list-group-item-action {{routeNameContains('technologies.create') ? 'active' : ''}}">Aggiungi una tecnologia</a>
+                    {{-- <a href="" class="list-group-item list-group-item-action {{routeNameContains('technologies.create') ? 'active' : ''}}">Aggiungi una tecnologia</a> --}}
                     
                 </div>
                 

@@ -125,6 +125,18 @@ class ProjectController extends Controller
 
         $project->update($formData);
 
+        if (array_key_exists('technologies', $formData)) {
+
+            // la funzione sync permette di sincronizzare i tag selezionati nel form, con quelli presenti nella tabella ponte, in modo tale da non creare dei dublicati
+            $project->technologies()->sync($formData['technologies']);
+
+            // devo comprendere anche il caso in cui non seleziono nessun tag(non entra nell'if) quindi devo eliminare i suoi riferimenti dalla tabella ponte
+        } else {
+
+            // detach è il metodo che fa ciò che viene descritto nel commento sopra
+            $project->technologies()->detach();
+        }
+
         return redirect()->route('admin.projects.show', $project);
     }
 

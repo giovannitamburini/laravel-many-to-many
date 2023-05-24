@@ -62,7 +62,8 @@
             {{-- nel name ci devo inserire il nometabella[], in questo caso technologies[], perchè gli passo un array --}}
             {{-- nel value ci inserisco l'id di tech perchè sarà quello che effettivamente inserirò nella tabella ponte --}}
             {{-- nel id ci inserisco  l'id di tech e come prefisso il nome più il trattino--}}
-            <input type="checkbox" id="technology-{{$technology->id}}" name="technologies[]" value="{{$technology->id}}">
+            {{-- @checked bisogna aggiungerla per controllare se è già presente la tecnologia quando vado a modificare il progetto: in questo caso si traduce: se le tecnologie del progetto contengono la tecnologia a cui sono arrivato allora selezionala --}}
+            <input type="checkbox" id="technology-{{$technology->id}}" name="technologies[]" value="{{$technology->id}}" @checked($project->technologies->contains($technology))>
             <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
 
         </div>

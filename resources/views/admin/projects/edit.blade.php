@@ -10,6 +10,7 @@
 
     @method('PUT')
 
+    {{-- TITOLO --}}
     <div class="mb-3">
         <label for="">Titolo</label>
         <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title') ?? $project->title}}">
@@ -22,6 +23,7 @@
         @enderror
     </div>
 
+    {{-- TIPOLOGIA --}}
     <div class="mb-3">
         <label for="type_id">Tipologia</label>
         {{-- name deve chiamarsi type_id per la corrispondenza nella tabella --}}
@@ -48,6 +50,28 @@
 
     </div>
 
+    {{-- TECNOLOGIA --}}
+    <div class="mb-3 form-group">
+        <h4>Tecnologie</h4>
+
+        {{-- ciclo per ogni elemento contenuto in technologies --}}
+        @foreach ($technologies as $technology)
+
+        <div class="form-check">
+            
+            {{-- nel name ci devo inserire il nometabella[], in questo caso technologies[], perchè gli passo un array --}}
+            {{-- nel value ci inserisco l'id di tech perchè sarà quello che effettivamente inserirò nella tabella ponte --}}
+            {{-- nel id ci inserisco  l'id di tech e come prefisso il nome più il trattino--}}
+            <input type="checkbox" id="technology-{{$technology->id}}" name="technologies[]" value="{{$technology->id}}">
+            <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+
+        </div>
+            
+        @endforeach
+
+    </div>
+
+    {{-- CONTENUTO --}}
     <div class="mb-3">
         <label for="">Contenuto</label>
         <textarea name="content" id="content" cols="30" rows="10" class="form-control @error('content') is-invalid @enderror">{{old('content') ?? $project->content}}</textarea>
@@ -61,6 +85,7 @@
         @enderror
     </div>
 
+    {{-- BITTON SUBMIT --}}
     <button class="btn btn-primary" type="submit">Modifica</button>
 </form>
     

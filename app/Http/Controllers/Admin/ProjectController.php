@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -59,7 +62,15 @@ class ProjectController extends Controller
 
         $project->slug = Str::slug($project->title, '-');
 
+        // lo sposto sopra il successivo if, perchè solo quando effetuiamo il salvataggio del dato della riga del database viene generato l'id
         $project->save();
+
+        // inserisco le technologie relative ai progetti nella tabella ponte
+        if (array_key_exists('technologies', $formData)) {
+
+            // il metdodo attach ci permette di inserire in automatico nella tabella ponte i collegamemti, riga per riga, con le technologie passatagli tramite un array
+            $project->technologies()->attach($formData['technologies']);
+        }
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -86,7 +97,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'slug', 'type_id'];
+    protected $fillable = ['title', 'content', 'slug', 'type_id', 'technology_id'];
 
     // ogni project avrà una sola categoria (category al singolare)
     public function type()

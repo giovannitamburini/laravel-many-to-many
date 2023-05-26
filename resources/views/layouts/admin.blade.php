@@ -100,6 +100,7 @@ function routeNameContains($string) {
 
     <div id="admin-layout">
 
+        {{-- SIDEBAR --}}
         <aside id="admin-sidebar">
 
             <div class="card {{$routeName == 'admin.home' ? 'border-primary' : ''}}">

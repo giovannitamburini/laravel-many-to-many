@@ -36,7 +36,7 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
 
             // eliminare la relazione delle righe tramite la foreign key
-            // sintassi. nome Tabella, nome del campo, foreign
+            // sintassi. nome Tabella, nome della colonna, foreign
             $table->dropForeign('projects_type_id_foreign');
             // eliminare la colonna
             $table->dropColumn('type_id');

@@ -9,7 +9,8 @@
     <table class="table table-striped">
         <th>Nome</th>
         <th>Slug</th>
-        {{-- <th>N° progetti</th> --}}
+        <th>N° progetti</th>
+        <th></th>
         <th></th>
         
         <tbody>
@@ -19,10 +20,11 @@
             <tr>
                 <td>{{$technology->name}}</td>
                 <td>{{$technology->slug}}</td>
-                {{-- <td>{{count($technologies->)}}</td> --}}
+                <td>{{count($technology->projects)}}</td>
+                <td><a href="{{route('admin.technologies.show', $technology)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
                 <td>
                     {{-- <a href="{{route('admin.technology.show', $technology)}}"><i class="fa-solid fa-magnifying-glass"></i></a> --}}
-                    <div class="d-flex justify-content-around">
+                    <div class="d-flex gap-1">
 
                         <a href="{{route('admin.technologies.edit', $technology)}}" class="btn btn-primary">Modifica</a>
                 

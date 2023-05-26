@@ -162,7 +162,8 @@ class ProjectController extends Controller
             'title' => 'required|max:255|min:3',
             'content' => 'required',
             // type_id può essere nullo e deve esistere nella tabella 'types', 'id
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id',
 
         ], [
 
@@ -170,7 +171,8 @@ class ProjectController extends Controller
             'title.max' => 'Il titolo non deve essere più lungo di 100 caratteri',
             'title.min' => 'Il titolo deve avere minimo 3 caratteri',
             'content.required' => 'Devi inserire un contenuto',
-            'type_id.exists' => 'La tipologia deve essere presente nella lista'
+            'type_id.exists' => 'La tipologia deve essere presente nella lista',
+            'technologies.exists' => 'La tecnologia deve essere presente nella lista'
 
         ])->validate();
 

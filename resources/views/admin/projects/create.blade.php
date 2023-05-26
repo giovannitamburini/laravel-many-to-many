@@ -53,19 +53,25 @@
         <h4>Tecnologie</h4>
 
         {{-- ciclo per ogni elemento contenuto in technologies --}}
-        @foreach ($technologies as $technology)
-
         <div class="form-check">
+            
+            @foreach ($technologies as $technology)
             
             {{-- nel name ci devo inserire il nometabella[], in questo caso technologies[], perchè gli passo un array --}}
             {{-- nel value ci inserisco l'id di tech perchè sarà quello che effettivamente inserirò nella tabella ponte --}}
             {{-- nel id ci inserisco  l'id di tech e come prefisso il nome più il trattino--}}
-            <input type="checkbox" id="technology-{{$technology->id}}" name="technologies[]" value="{{$technology->id}}">
-            <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+            <input type="checkbox" id="technology_{{$technology->id}}" name="technologies[]" value="{{$technology->id}}" @checked(in_array($technology->id, old('technologies', [])))>
+            <label for="technology_{{$technology->id}}">{{$technology->name}}</label>
 
-        </div>
+            @endforeach
             
-        @endforeach
+        </div>
+
+        @error('technologies')
+        <div class="fw-light" style="color: #ea868f">
+            {{$message}}
+        </div>
+        @enderror
 
 
     </div>

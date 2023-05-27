@@ -127,6 +127,25 @@ class ProjectController extends Controller
 
         $this->validation($formData);
 
+        if ($request->hasFile('cover_image')) {
+
+            if ($project->cover_image) {
+
+                // cancello la vecchia immagine contenuta nello storage
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::put('project_images',  $request->cover_image);
+
+            // dd($path);
+
+            $formData['cover_image'] = $path;
+        } else {
+
+            // caso in cui il progetto non abbia già un immagine
+
+        }
+
         // metodo 1
         // $project->slug = Str::slug($formData['title'], '-');
 
@@ -158,6 +177,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_image) {
+
+            Storage::delete($project->cover_image);
+        }
+
         $project->delete();
 
         return redirect()->route('admin.projects.index');

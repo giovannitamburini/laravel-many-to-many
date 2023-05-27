@@ -6,7 +6,8 @@
 
     <div class="py-3">
 
-        
+        <img src="{{asset('storage/' . $project->cover_image)}}" alt="" class="w-50">
+
         <h1 class="text-start">Visualizzazione Progetto</h1>
 
         {{-- tipologia, operatore ternario per il caso in cui il valore type sia nullo(visto che è stata impostata la possibilità che sia nullo) --}}

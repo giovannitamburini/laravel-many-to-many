@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -57,6 +58,15 @@ class ProjectController extends Controller
         $this->validation($formData);
 
         $project = new Project();
+
+        if ($request->hasFile('cover_image')) {
+
+            $path = Storage::put('project_images',  $request->cover_image);
+
+            // dd($path);
+
+            $formData['cover_image'] = $path;
+        }
 
         $project->fill($formData);
 
@@ -164,6 +174,7 @@ class ProjectController extends Controller
             // type_id può essere nullo e deve esistere nella tabella 'types', 'id
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
+            'cover_image' => 'nullable|image|max:4096',
 
         ], [
 
@@ -172,7 +183,9 @@ class ProjectController extends Controller
             'title.min' => 'Il titolo deve avere minimo 3 caratteri',
             'content.required' => 'Devi inserire un contenuto',
             'type_id.exists' => 'La tipologia deve essere presente nella lista',
-            'technologies.exists' => 'La tecnologia deve essere presente nella lista'
+            'technologies.exists' => 'La tecnologia deve essere presente nella lista',
+            'cover_image.max' => 'La dimesione del file è superiore al limite (4096 bytes)',
+            'cover_image.image' => 'Il file deve essere di tipo immagine',
 
         ])->validate();
 

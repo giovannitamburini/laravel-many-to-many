@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container text-center">
+<div class="container">
 
     <div class="py-3">
 
@@ -10,8 +10,10 @@
 
         <h1 class="text-start">Visualizzazione Progetto</h1>
 
+        <div>Utente: {{$project->user->name}}</div>
+
         {{-- tipologia, operatore ternario per il caso in cui il valore type sia nullo(visto che è stata impostata la possibilità che sia nullo) --}}
-        <span>Tipologia: {{$project->type ? $project->type->name : 'nessuna'}}</span>
+        <span class="text-start">Tipologia: {{$project->type ? $project->type->name : 'nessuna'}}</span>
         
         {{-- TECNOLOGIE --}}
         <div class="d-flex py-3">
@@ -25,8 +27,11 @@
         <hr>
 
         <h2>{{$project->title}}</h2>
+
         <small>{{$project->slug}}</small>
+
         <hr>
+
         <p>{{$project->content}}</p>
     </div>
 

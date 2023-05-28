@@ -19,9 +19,35 @@
     </div>
 </div>
 
-<div class="content">
+
+{{-- FORM PER L'INVIO DELLA MAIL --}}
+
+{{-- <div class="content">
     <div class="container">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora temporibus, dicta nemo aliquam totam nisi deserunt soluta quas voluptatum ab beatae praesentium necessitatibus minus, facilis illum rerum officiis accusamus dolores!</p>
+
+        <h2>Vuoi contattarmi?</h2>
+        <p>Compila il form per essere riconttatato il prima possibile</p>
+
+        <form action="" method="">
+
+            <div class="mb-3">
+                <label for="name">Nome personale</label>
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Inserisci la tua mail</label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label for="content">Scrivimi un messaggio</label>
+                <textarea name="content" id="content" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Invia</button>
+        </form>
+
     </div>
-</div>
+</div> --}}
 @endsection

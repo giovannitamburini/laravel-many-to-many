@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +24,14 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        // $projects = Project::all();
+
+        // prendo l'id dell'utente
+        $user_id = Auth::id();
+
+        // filtro i progetti in base all'utente
+        $projects = Project::where('user_id', $user_id)->get();
+
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -70,6 +78,8 @@ class ProjectController extends Controller
 
         $project->fill($formData);
 
+        $project->user_id = Auth::id();
+
         $project->slug = Str::slug($project->title, '-');
 
         // lo sposto sopra il successivo if, perchè solo quando effetuiamo il salvataggio del dato della riga del database viene generato l'id
@@ -94,7 +104,13 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
 
-        return view('admin/projects/show', compact('project'));
+        if ($project->user_id == Auth::id()) {
+
+            return view('admin.projects.show', compact('project'));
+        } else {
+
+            return view('admin.projects.index');
+        }
     }
 
     /**
@@ -105,6 +121,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        if ($project->user_id != Auth::id()) {
+
+            return view('admin.projects.index');
+        }
+
         $types = Type::all();
 
         $technologies = Technology::all();
